@@ -48,6 +48,8 @@
 .stat-card {
   display: flex !important;
   flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
   gap: 4px !important;
   background: rgba(237, 239, 235, 0.05) !important;
   border: 1px solid rgba(237, 239, 235, 0.12) !important;
@@ -71,10 +73,43 @@
   display: block !important;
 }
 
+/* 100% Wayanad Locations Coverage Banner */
+.wayanad-locations-strip {
+  margin-top: 18px !important;
+  padding: 10px 14px !important;
+  background: rgba(201, 154, 62, 0.08) !important;
+  border: 1px solid rgba(201, 154, 62, 0.25) !important;
+  border-radius: 12px !important;
+  text-align: center !important;
+}
+.wayanad-locations-strip strong {
+  display: block !important;
+  font-size: 11px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  color: var(--brass-hi, #e4b866) !important;
+  margin-bottom: 5px !important;
+}
+.wayanad-locations-strip .towns {
+  font-size: 12px !important;
+  line-height: 1.6 !important;
+  color: var(--night-muted, #c4cbcc) !important;
+}
+.wayanad-locations-strip .towns span {
+  display: inline-block !important;
+  white-space: nowrap !important;
+}
+
 @media (max-width: 620px) {
   .hero {
-    padding-top: 10px !important;
+    padding-top: max(96px, calc(env(safe-area-inset-top, 0px) + 82px)) !important;
     padding-bottom: clamp(48px, 8vh, 76px) !important;
+  }
+  .wayanad-badge-pill {
+    margin-top: 6px !important;
+    margin-bottom: 14px !important;
+    padding: 6px 14px !important;
+    font-size: 11.5px !important;
   }
   .hero-grid {
     gap: 22px !important;
@@ -119,6 +154,17 @@
   .stat-lbl {
     font-size: 10px !important;
   }
+  .wayanad-locations-strip {
+    margin-top: 14px !important;
+    padding: 8px 10px !important;
+  }
+  .wayanad-locations-strip strong {
+    font-size: 10px !important;
+  }
+  .wayanad-locations-strip .towns {
+    font-size: 11px !important;
+    line-height: 1.5 !important;
+  }
   .portal-wrap {
     width: min(86%, 290px) !important;
     margin: 16px auto 20px !important;
@@ -126,17 +172,21 @@
   .portal {
     aspect-ratio: 4 / 4.8 !important;
     border-radius: 999px 999px 18px 18px !important;
+    border: 2px solid var(--brass, #c99a3e) !important;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6) !important;
   }
   .outline {
-    inset: -8px !important;
-    width: calc(100% + 16px) !important;
-    height: calc(100% + 16px) !important;
-    stroke-width: 1 !important;
+    display: none !important;
   }
   .hero-3d-badge {
-    top: 10px !important;
-    padding: 4px 8px !important;
-    font-size: 10.5px !important;
+    top: 14px !important;
+    padding: 4px 12px !important;
+    font-size: 11px !important;
+    max-width: 88% !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    justify-content: center !important;
   }
   .models {
     display: grid !important;
@@ -234,8 +284,15 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElem
   },
   "areaServed": [
     { "@type": "AdministrativeArea", "name": "Sulthan Bathery" },
-    { "@type": "AdministrativeArea", "name": "Wayanad" },
     { "@type": "AdministrativeArea", "name": "Kalpetta" },
+    { "@type": "AdministrativeArea", "name": "Mananthavady" },
+    { "@type": "AdministrativeArea", "name": "Meppadi" },
+    { "@type": "AdministrativeArea", "name": "Vythiri" },
+    { "@type": "AdministrativeArea", "name": "Ambalavayal" },
+    { "@type": "AdministrativeArea", "name": "Moolankave" },
+    { "@type": "AdministrativeArea", "name": "Pulpally" },
+    { "@type": "AdministrativeArea", "name": "Panamaram" },
+    { "@type": "AdministrativeArea", "name": "Wayanad" },
     { "@type": "AdministrativeArea", "name": "Kerala" }
   ]
 }
@@ -329,16 +386,32 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElem
         </div>
         <div class="hero-stats rv" style="--rd:.45s">
           <div class="stat-card">
-            <span class="stat-num">100%</span>
+            <span class="stat-num">100% </span>
             <span class="stat-lbl">Wayanad Focused</span>
           </div>
           <div class="stat-card">
-            <span class="stat-num">5</span>
+            <span class="stat-num">5 </span>
             <span class="stat-lbl">Core Hill Services</span>
           </div>
           <div class="stat-card">
-            <span class="stat-num">1</span>
+            <span class="stat-num">1 </span>
             <span class="stat-lbl">Turnkey Contract</span>
+          </div>
+        </div>
+
+        <!-- 100% Wayanad Regional Coverage Strip -->
+        <div class="wayanad-locations-strip rv" style="--rd:.5s">
+          <strong>Key Coverage Areas Across Wayanad</strong>
+          <div class="towns">
+            <span>Sulthan Bathery</span> &bull; 
+            <span>Kalpetta</span> &bull; 
+            <span>Mananthavady</span> &bull; 
+            <span>Meppadi</span> &bull; 
+            <span>Vythiri</span> &bull; 
+            <span>Ambalavayal</span> &bull; 
+            <span>Moolankave</span> &bull; 
+            <span>Pulpally</span> &bull; 
+            <span>Panamaram</span>
           </div>
         </div>
       </div>
@@ -364,7 +437,7 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElem
               <div class="hero-3d-grad"></div>
               <div class="hero-3d-badge" id="hero-badge">
                 <span class="badge-dot"></span>
-                <span id="hero-badge-text">3D Elevation &bull; N Arch Wayanad</span>
+                <span id="hero-badge-text">3D Elevation &bull; N Arch</span>
               </div>
             </div>
 
