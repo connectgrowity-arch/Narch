@@ -1,7 +1,7 @@
 {
   "config": {
     "siteTitle": "N Arch Builders & Designers | Sulthan Bathery, Wayanad",
-    "metaDescription": "N Arch designs and builds premium homes, interiors and landscapes across Wayanad. Architecture, structural engineering and construction based in Sulthan Bathery, Kerala.",
+    "metaDescription": "N Arch is a 100% Wayanad-focused architectural design and turnkey construction firm based in Sulthan Bathery. Specialized in hill terrain villas, traditional Kerala Nalukettu, monsoon engineering, and luxury interiors across Wayanad.",
     "phone": "+91 97451 87474",
     "phone2": "+91 94471 87474",
     "whatsapp": "919745187474",
@@ -16,57 +16,57 @@
   "services": [
     {
       "name": "Construction",
-      "short": "Houses and buildings, built from foundation to finish.",
-      "long": "Complete building work for homes and small commercial spaces, supervised by our own team on site.",
+      "short": "Turnkey residential & commercial building engineered for Wayanad terrain.",
+      "long": "End-to-end building construction optimized for Wayanad’s red laterite soil, stepped hill slopes, and heavy monsoon rains. Supervised daily by our in-house civil engineers from Bathery.",
       "pts": [
-        "Foundation and structure",
-        "Masonry and roofing",
-        "Electrical and plumbing coordination",
-        "Finishing and handover"
+        "Contour foundations & stepped retaining walls for hill slopes",
+        "Monsoon-grade waterproofing, deep eaves & clay tiled roofing",
+        "Sulthan Bathery, Kalpetta & Mananthavady municipality approval handling",
+        "Turnkey execution from soil testing to key handover"
       ]
     },
     {
       "name": "Interiors",
-      "short": "Rooms planned around how you actually live.",
-      "long": "Interior planning and fit-out that keeps storage, light and circulation in balance with the style you want.",
+      "short": "Spaces planned for Wayanad’s climate, mist, and natural lifestyle.",
+      "long": "Custom interior architecture using boiling waterproof (BWP) materials, warm Kerala teak joinery, and natural ventilation designed to prevent hill humidity and mist dampness.",
       "pts": [
-        "Space planning",
-        "Modular kitchens and wardrobes",
-        "Lighting and ceilings",
-        "Furniture layout"
+        "Moisture-resistant BWP modular kitchens & wardrobes",
+        "Heritage central Nadumuttam courtyards with wooden Oonjal",
+        "Warm ambient LED lighting designed for misty Wayanad evenings",
+        "Teak, Anjili & fluted timber acoustic wall cladding"
       ]
     },
     {
       "name": "3D Elevation",
-      "short": "See your home in 3D before a brick is laid.",
-      "long": "Realistic 3D views of the exterior so you can compare roofs, colours and materials while changes are still easy.",
+      "short": "Photorealistic 3D elevations visualized on your actual Wayanad plot.",
+      "long": "Detailed 3D exterior renders that factor in your plot’s natural slope, tree cover, and sunlight orientation before breaking ground in Wayanad.",
       "pts": [
-        "Front and side views",
-        "Material and colour options",
-        "Day and evening renders",
-        "Revisions until approved"
+        "Front, side, and 360-degree hill perspective renders",
+        "Traditional Kerala Nalukettu & contemporary modern villa palettes",
+        "Daylight, heavy monsoon rain & evening ambient lighting simulations",
+        "Unlimited revisions until your family approves the final design"
       ]
     },
     {
       "name": "Renovation",
-      "short": "Give an older building new life and new space.",
-      "long": "Repairs, extensions and remodelling for existing houses, planned to reduce disruption while you live in them.",
+      "short": "Restoring and expanding ancestral homes and plantation bungalows.",
+      "long": "Specialized structural reinforcement, damp-proofing, and modern functional upgrades for older Wayanad residences and estate bungalows without losing heritage character.",
       "pts": [
-        "Structural repairs",
-        "Extensions and added floors",
-        "Waterproofing and leakage fixes",
-        "Kitchen and bath upgrades"
+        "Monsoon damp-proof courses (DPC) & roof re-tiling solutions",
+        "Ancestral Nalukettu timber restoration & modernization",
+        "Vertical floor extensions with RCC structural load enhancement",
+        "Contemporary kitchen & modern bathroom remodelling"
       ]
     },
     {
       "name": "Landscaping",
-      "short": "Gardens, paths and outdoor spaces that last the monsoon.",
-      "long": "Outdoor design for sloped and flat plots, with drainage and planting chosen for Wayanad weather.",
+      "short": "Monsoon-tested outdoor architecture, stone paving & slope gardens.",
+      "long": "Outdoor hill architecture designed to manage heavy monsoon rainwater runoff, prevent soil erosion, and blend seamlessly into Wayanad’s coffee and tea estate surroundings.",
       "pts": [
-        "Garden and lawn design",
-        "Paving and boundary walls",
-        "Retaining walls and drainage",
-        "Planting plans"
+        "Engineered retaining walls with weep holes & drainage channels",
+        "Grass-paver driveways, natural granite steps & boundary walls",
+        "Native tropical flora, mist garden planning & lawn stabilization",
+        "Concealed rainwater harvesting & stormwater diversion systems"
       ]
     }
   ],
@@ -233,5 +233,48 @@
       "image": "assets/images/hero-kerala-home.jpg",
       "placeholder": false
     }
-  ]
+  ],
+  "wayanadCoverage": {
+    "taluks": [
+      {
+        "name": "Sulthan Bathery Taluk",
+        "towns": [
+          "Sulthan Bathery",
+          "Ambalavayal",
+          "Meenangadi",
+          "Noolpuzha",
+          "Nenmeni",
+          "Pulpally",
+          "Poothadi",
+          "Moolankave"
+        ]
+      },
+      {
+        "name": "Vythiri / Kalpetta Taluk",
+        "towns": [
+          "Kalpetta",
+          "Meppadi",
+          "Vythiri",
+          "Muttil",
+          "Kaniyambetta",
+          "Pozhuthana",
+          "Thariyode",
+          "Padinjarathara"
+        ]
+      },
+      {
+        "name": "Mananthavady Taluk",
+        "towns": [
+          "Mananthavady",
+          "Panamaram",
+          "Vellamunda",
+          "Thirunelly",
+          "Edavaka",
+          "Thavinhal"
+        ]
+      }
+    ],
+    "monsoonReady": true,
+    "officeLocation": "Opposite Victory Hospital, Near Matha Theatre, Sulthan Bathery, Wayanad"
+  }
 }
