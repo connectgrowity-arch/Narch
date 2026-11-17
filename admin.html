@@ -1,0 +1,790 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>N Arch CMS Admin Dashboard | Content & Lead Management System</title>
+<link rel="stylesheet" href="assets/css/narch-main.css">
+<style>
+.admin-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 290px 1fr;
+  background: var(--paper);
+}
+@media (max-width: 960px) {
+  .admin-shell { grid-template-columns: 1fr; }
+  .admin-sidebar { display: none; }
+}
+.admin-sidebar {
+  background: var(--night);
+  color: var(--night-fg);
+  padding: 32px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  border-right: 1px solid var(--night-line);
+}
+.admin-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  padding-inline: 8px;
+}
+.admin-brand img { width: 44px; height: auto; }
+.admin-brand b { font-size: 1.15rem; letter-spacing: -0.02em; display: block; }
+.admin-brand small { font-size: 0.68rem; letter-spacing: 0.2em; color: var(--brass); }
+.admin-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.admin-nav button {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--night-muted);
+  font: 500 15px var(--display);
+  padding: 13px 16px;
+  border-radius: 12px;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all .2s;
+  width: 100%;
+}
+.admin-nav button:hover {
+  background: var(--night-2);
+  color: var(--night-fg);
+}
+.admin-nav button.active {
+  background: var(--night-2);
+  color: var(--brass-hi);
+  border-color: var(--brass);
+}
+.admin-nav .badge {
+  margin-left: auto;
+  background: var(--brass);
+  color: #151a1c;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 9px;
+  border-radius: 99px;
+}
+.admin-main {
+  padding: clamp(24px, 4vw, 48px);
+  max-width: 1180px;
+  margin: 0 auto;
+  width: 100%;
+}
+.admin-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 32px;
+  margin-bottom: 32px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+}
+.admin-card h2 {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+.admin-card p.sub {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-bottom: 24px;
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+@media (max-width: 650px) {
+  .form-grid { grid-template-columns: 1fr; }
+}
+.full-col { grid-column: 1 / -1; }
+.admin-card label {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+.admin-card input, .admin-card textarea, .admin-card select {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1.5px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color .2s;
+}
+.admin-card input:focus, .admin-card textarea:focus, .admin-card select:focus {
+  outline: none;
+  border-color: var(--brass);
+}
+.action-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.proj-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+}
+.proj-table th, .proj-table td {
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.95rem;
+  vertical-align: middle;
+}
+.proj-table th {
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+.status-pill {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.status-new { background: rgba(31, 168, 85, 0.15); color: #1fa855; border: 1px solid rgba(31, 168, 85, 0.3); }
+.status-contacted { background: rgba(201, 154, 62, 0.15); color: var(--brass); border: 1px solid rgba(201, 154, 62, 0.3); }
+.status-visit { background: rgba(56, 128, 255, 0.15); color: #3880ff; border: 1px solid rgba(56, 128, 255, 0.3); }
+.status-closed { background: rgba(140, 150, 153, 0.15); color: var(--muted); border: 1px solid var(--line); }
+
+.crm-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+}
+.crm-search {
+  display: flex;
+  gap: 12px;
+  flex: 1;
+  max-width: 480px;
+}
+.crm-actions {
+  display: flex;
+  gap: 10px;
+}
+.crm-btn-sm {
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  transition: all .2s;
+}
+.crm-btn-sm:hover {
+  border-color: var(--brass);
+  color: var(--brass);
+}
+.crm-btn-wa {
+  background: #1fa855;
+  color: #fff;
+  border-color: #1fa855;
+}
+.crm-btn-wa:hover {
+  background: #198745;
+  color: #fff;
+}
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--night);
+  color: var(--night-fg);
+  padding: 16px 24px;
+  border-radius: 12px;
+  border-left: 4px solid var(--brass);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s, transform .3s;
+  transform: translateY(10px);
+  z-index: 999;
+}
+.toast.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+</style>
+</head>
+<body>
+
+<div class="admin-shell">
+  <!-- Sidebar -->
+  <aside class="admin-sidebar">
+    <a class="admin-brand" href="index.html">
+      <img src="assets/images/logo.png" alt="N Arch Logo">
+      <div>
+        <b>N ARCH CMS</b>
+        <small>CONTENT &amp; LEADS</small>
+      </div>
+    </a>
+
+    <nav class="admin-nav">
+      <button class="active" data-tab="tab-enquiries">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Leads &amp; Enquiries
+        <span class="badge" id="enquiry-badge">0</span>
+      </button>
+      <button data-tab="tab-contact">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Company Contact
+      </button>
+      <button data-tab="tab-projects">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        Projects Portfolio
+      </button>
+      <button data-tab="tab-services">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        Our Services
+      </button>
+      <button data-tab="tab-seo">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        SEO &amp; Analytics
+      </button>
+    </nav>
+
+    <div style="margin-top:auto;">
+      <a class="btn btn-line" style="width:100%; justify-content:center;" href="index.html" target="_blank">
+        &larr; View Website
+      </a>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="admin-main">
+    <div class="action-bar">
+      <div>
+        <div class="label">Content &amp; Lead Management</div>
+        <h1>Website Administration</h1>
+      </div>
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <button class="btn btn-line" id="btn-export">Download JSON</button>
+        <button class="btn btn-brass" id="btn-save">Save Changes Live</button>
+      </div>
+    </div>
+
+    <!-- Tab 0: Leads & Enquiries (Mini CRM) -->
+    <div class="tab-pane" id="tab-enquiries">
+      <div class="admin-card">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
+          <div>
+            <h2>Website Enquiries &amp; Client Leads</h2>
+            <p class="sub" style="margin-bottom:0;">All project enquiries sent through the website contact form appear here automatically. No paid CRM subscription needed!</p>
+          </div>
+          <div style="display:flex; gap:10px;">
+            <button class="btn btn-line" id="btn-export-leads" style="padding:10px 18px; font-size:14px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Export Leads (CSV)
+            </button>
+          </div>
+        </div>
+
+        <div class="crm-toolbar">
+          <div class="crm-search">
+            <input id="crm-search-box" placeholder="Search by name, phone, or location in Wayanad..." style="max-width:340px;">
+            <select id="crm-filter-status" style="width:160px;">
+              <option value="All">All Statuses</option>
+              <option value="New">New</option>
+              <option value="In Discussion">In Discussion</option>
+              <option value="Site Visit Booked">Site Visit Booked</option>
+              <option value="Project Closed">Project Closed</option>
+            </select>
+          </div>
+          <div>
+            <button class="crm-btn-sm" id="btn-clear-leads" style="color:var(--err);">Clear All Enquiries</button>
+          </div>
+        </div>
+
+        <div style="overflow-x:auto;">
+          <table class="proj-table">
+            <thead>
+              <tr>
+                <th>Date &amp; Time</th>
+                <th>Client Name</th>
+                <th>Mobile Number(s)</th>
+                <th>Service &amp; Location</th>
+                <th>Project Details</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="enquiries-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 1: Company Contact -->
+    <div class="tab-pane" id="tab-contact" hidden>
+      <div class="admin-card">
+        <h2>Company &amp; Contact Details</h2>
+        <p class="sub">These mobile numbers, office address, and hours appear across the website header, footer, contact page, and WhatsApp links.</p>
+
+        <div class="form-grid">
+          <div>
+            <label for="cfg-phone">Primary Mobile Number (Main Call)</label>
+            <input id="cfg-phone" placeholder="+91 97451 87474">
+          </div>
+          <div>
+            <label for="cfg-phone2">Secondary Mobile / Alternate Phone</label>
+            <input id="cfg-phone2" placeholder="+91 94471 87474">
+          </div>
+          <div>
+            <label for="cfg-wa">WhatsApp Direct Number (digits with country code)</label>
+            <input id="cfg-wa" placeholder="919745187474">
+          </div>
+          <div>
+            <label for="cfg-email">Email Address</label>
+            <input id="cfg-email" type="email" placeholder="info@narch.co.in">
+          </div>
+          <div>
+            <label for="cfg-hours">Working Hours</label>
+            <input id="cfg-hours" placeholder="Mon to Sat: 9:30 AM - 6:00 PM">
+          </div>
+          <div class="full-col">
+            <label for="cfg-addr">Office Address</label>
+            <textarea id="cfg-addr" rows="3" placeholder="Opposite Victory Hospital, Near Matha Theatre, Sulthan Bathery, Wayanad"></textarea>
+          </div>
+          <div class="full-col">
+            <label for="cfg-maps">Google Maps URL</label>
+            <input id="cfg-maps" placeholder="https://www.google.com/maps/search/?api=1&query=...">
+          </div>
+          <div>
+            <label for="cfg-insta">Instagram Profile URL</label>
+            <input id="cfg-insta" placeholder="https://instagram.com/narch_builders">
+          </div>
+          <div>
+            <label for="cfg-fb">Facebook Profile URL</label>
+            <input id="cfg-fb" placeholder="https://facebook.com/narchbuilders">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 2: Projects -->
+    <div class="tab-pane" id="tab-projects" hidden>
+      <div class="admin-card">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+          <div>
+            <h2>Project Portfolio</h2>
+            <p class="sub" style="margin-bottom:0;">Manage architectural and building projects shown in the gallery.</p>
+          </div>
+          <button class="btn btn-brass" id="btn-add-proj" style="padding:10px 20px; font-size:14px;">+ Add Project</button>
+        </div>
+
+        <table class="proj-table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Category</th>
+              <th>Location</th>
+              <th>Size</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="proj-rows"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Tab 3: Services -->
+    <div class="tab-pane" id="tab-services" hidden>
+      <div class="admin-card">
+        <h2>Core Services</h2>
+        <p class="sub">Review the 5 specialized architectural services offered in Wayanad.</p>
+        <div id="services-list" style="display:flex; flex-direction:column; gap:20px;"></div>
+      </div>
+    </div>
+
+    <!-- Tab 4: SEO -->
+    <div class="tab-pane" id="tab-seo" hidden>
+      <div class="admin-card">
+        <h2>SEO &amp; Search Engine Optimization</h2>
+        <p class="sub">Fine-tune meta tags to rank for Wayanad construction, villa building, and architectural queries.</p>
+
+        <div class="form-grid">
+          <div class="full-col">
+            <label for="seo-title">Site Meta Title</label>
+            <input id="seo-title" placeholder="N Arch Builders & Designers | Sulthan Bathery, Wayanad">
+          </div>
+          <div class="full-col">
+            <label for="seo-desc">Meta Description (Max 160 characters recommended)</label>
+            <textarea id="seo-desc" rows="3" placeholder="N Arch designs and builds homes, interiors and landscapes across Wayanad..."></textarea>
+          </div>
+          <div class="full-col">
+            <label for="seo-ga">Google Analytics GA4 ID</label>
+            <input id="seo-ga" placeholder="G-XXXXXXXXXX">
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div class="toast" id="toast">Changes saved successfully!</div>
+
+<script>
+let currentData = null;
+let enquiries = [];
+
+async function loadData() {
+  try {
+    const res = await fetch('site-content.json');
+    const fileData = await res.json();
+    const local = localStorage.getItem('narch_cms_content');
+    if (local) {
+      currentData = JSON.parse(local);
+      if (!currentData.projects || currentData.projects.length < fileData.projects.length) {
+        currentData.projects = fileData.projects;
+      }
+      currentData.config = { ...fileData.config, ...currentData.config };
+    } else {
+      currentData = fileData;
+    }
+  } catch (e) {
+    console.error('Error loading content:', e);
+  }
+
+  // Load Enquiries from localStorage or seed initial sample enquiries
+  try {
+    const localEnq = localStorage.getItem('narch_enquiries');
+    if (localEnq) {
+      enquiries = JSON.parse(localEnq);
+    } else {
+      enquiries = [
+        {
+          id: 1,
+          date: '13 Nov 2026, 02:45 PM',
+          name: 'Muhammed Shafi',
+          phone: '+91 98471 23456',
+          phone2: '+91 94470 98765',
+          email: 'shafi.wayanad@gmail.com',
+          service: 'Construction',
+          location: 'Sulthan Bathery',
+          message: 'Looking to build a 2-storey 2800 sq ft contemporary villa on a 15-cent plot. Need architectural elevation and complete construction quote.',
+          status: 'New'
+        },
+        {
+          id: 2,
+          date: '12 Nov 2026, 11:20 AM',
+          name: 'Anjali Nair',
+          phone: '+91 97455 67890',
+          phone2: '',
+          email: 'anjali.nair@outlook.com',
+          service: 'Interiors',
+          location: 'Kalpetta',
+          message: 'Modular kitchen and living room joinery work for an existing home.',
+          status: 'In Discussion'
+        }
+      ];
+      localStorage.setItem('narch_enquiries', JSON.stringify(enquiries));
+    }
+  } catch (e) {
+    enquiries = [];
+  }
+
+  populateForm();
+  renderEnquiriesTable();
+}
+
+function populateForm() {
+  if (!currentData) return;
+  const c = currentData.config || {};
+  document.getElementById('cfg-phone').value = c.phone || '';
+  document.getElementById('cfg-phone2').value = c.phone2 || '';
+  document.getElementById('cfg-wa').value = c.whatsapp || '';
+  document.getElementById('cfg-email').value = c.email || '';
+  document.getElementById('cfg-hours').value = c.hours || '';
+  document.getElementById('cfg-addr').value = c.address || '';
+  document.getElementById('cfg-maps').value = c.mapsUrl || '';
+  document.getElementById('cfg-insta').value = c.instagram || '';
+  document.getElementById('cfg-fb').value = c.facebook || '';
+
+  document.getElementById('seo-title').value = c.siteTitle || '';
+  document.getElementById('seo-desc').value = c.metaDescription || '';
+  document.getElementById('seo-ga').value = c.gaId || '';
+
+  renderProjectRows();
+  renderServicesList();
+}
+
+/* ---------- Leads & Enquiries Management ---------- */
+function renderEnquiriesTable() {
+  const tbody = document.getElementById('enquiries-tbody');
+  const badge = document.getElementById('enquiry-badge');
+  badge.textContent = enquiries.length;
+
+  const filterStatus = document.getElementById('crm-filter-status').value;
+  const searchTerm = (document.getElementById('crm-search-box').value || '').toLowerCase().trim();
+
+  const filtered = enquiries.filter(enq => {
+    const matchStatus = filterStatus === 'All' || enq.status === filterStatus;
+    const matchSearch = !searchTerm ||
+      (enq.name && enq.name.toLowerCase().includes(searchTerm)) ||
+      (enq.phone && enq.phone.includes(searchTerm)) ||
+      (enq.phone2 && enq.phone2.includes(searchTerm)) ||
+      (enq.location && enq.location.toLowerCase().includes(searchTerm)) ||
+      (enq.service && enq.service.toLowerCase().includes(searchTerm));
+    return matchStatus && matchSearch;
+  });
+
+  if (filtered.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:36px; color:var(--muted);">No matching enquiries found.</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = filtered.map((enq, idx) => {
+    const cleanPhone = (enq.phone || '').replace(/\D/g, '');
+    const waReplyText = encodeURIComponent(`Hello ${enq.name}, thank you for contacting N Arch Builders & Designers regarding your ${enq.service} project in ${enq.location}. We would be happy to schedule an architectural consultation and site visit.`);
+    const waUrl = `https://wa.me/${cleanPhone.startsWith('91') ? cleanPhone : '91' + cleanPhone}?text=${waReplyText}`;
+
+    let statusClass = 'status-new';
+    if (enq.status === 'In Discussion') statusClass = 'status-contacted';
+    else if (enq.status === 'Site Visit Booked') statusClass = 'status-visit';
+    else if (enq.status === 'Project Closed') statusClass = 'status-closed';
+
+    return `
+      <tr>
+        <td style="white-space:nowrap; font-size:12px; color:var(--muted);">${enq.date || '—'}</td>
+        <td><b>${enq.name}</b></td>
+        <td>
+          <div><a href="tel:${enq.phone}" style="font-weight:600; color:var(--ink); text-decoration:underline;">${enq.phone}</a></div>
+          ${enq.phone2 ? `<div style="font-size:12px; color:var(--muted);">Alt: <a href="tel:${enq.phone2}">${enq.phone2}</a></div>` : ''}
+          ${enq.email ? `<div style="font-size:12px; color:var(--muted);">${enq.email}</div>` : ''}
+        </td>
+        <td>
+          <span style="font-weight:600;">${enq.service || 'General'}</span><br>
+          <small style="color:var(--muted);">${enq.location || 'Wayanad'}</small>
+        </td>
+        <td style="max-width:280px; font-size:13px; line-height:1.5;">${enq.message || '—'}</td>
+        <td>
+          <select onchange="updateLeadStatus(${enq.id}, this.value)" style="padding:4px 8px; font-size:12px; border-radius:8px; border:1px solid var(--line); background:var(--paper);">
+            <option value="New" ${enq.status === 'New' ? 'selected' : ''}>New</option>
+            <option value="In Discussion" ${enq.status === 'In Discussion' ? 'selected' : ''}>In Discussion</option>
+            <option value="Site Visit Booked" ${enq.status === 'Site Visit Booked' ? 'selected' : ''}>Site Visit Booked</option>
+            <option value="Project Closed" ${enq.status === 'Project Closed' ? 'selected' : ''}>Project Closed</option>
+          </select>
+        </td>
+        <td>
+          <div style="display:flex; gap:6px; flex-wrap:wrap;">
+            <a href="${waUrl}" target="_blank" rel="noopener" class="crm-btn-sm crm-btn-wa" title="Reply on WhatsApp">
+              WhatsApp
+            </a>
+            <a href="tel:${enq.phone}" class="crm-btn-sm" title="Call directly">
+              Call
+            </a>
+            <button onclick="deleteLead(${enq.id})" class="crm-btn-sm" style="color:var(--err);" title="Delete enquiry">
+              &times;
+            </button>
+          </div>
+        </td>
+      </tr>
+    `;
+  }).join('');
+}
+
+function updateLeadStatus(id, newStatus) {
+  const lead = enquiries.find(e => e.id === id);
+  if (lead) {
+    lead.status = newStatus;
+    localStorage.setItem('narch_enquiries', JSON.stringify(enquiries));
+    showToast(`Lead status updated to "${newStatus}"`);
+    renderEnquiriesTable();
+  }
+}
+
+function deleteLead(id) {
+  if (confirm('Delete this client enquiry?')) {
+    enquiries = enquiries.filter(e => e.id !== id);
+    localStorage.setItem('narch_enquiries', JSON.stringify(enquiries));
+    renderEnquiriesTable();
+    showToast('Enquiry deleted.');
+  }
+}
+
+document.getElementById('crm-search-box').addEventListener('input', renderEnquiriesTable);
+document.getElementById('crm-filter-status').addEventListener('change', renderEnquiriesTable);
+
+document.getElementById('btn-clear-leads').addEventListener('click', () => {
+  if (confirm('Are you sure you want to clear all enquiries? This cannot be undone.')) {
+    enquiries = [];
+    localStorage.setItem('narch_enquiries', JSON.stringify(enquiries));
+    renderEnquiriesTable();
+    showToast('All enquiries cleared.');
+  }
+});
+
+// Export Leads to CSV / Excel
+document.getElementById('btn-export-leads').addEventListener('click', () => {
+  if (enquiries.length === 0) {
+    alert('No enquiries to export.');
+    return;
+  }
+  const headers = ['ID', 'Date', 'Name', 'Primary Mobile', 'Alternate Mobile', 'Email', 'Service', 'Location', 'Message', 'Status'];
+  const rows = enquiries.map(e => [
+    e.id,
+    `"${(e.date || '').replace(/"/g, '""')}"`,
+    `"${(e.name || '').replace(/"/g, '""')}"`,
+    `"${(e.phone || '').replace(/"/g, '""')}"`,
+    `"${(e.phone2 || '').replace(/"/g, '""')}"`,
+    `"${(e.email || '').replace(/"/g, '""')}"`,
+    `"${(e.service || '').replace(/"/g, '""')}"`,
+    `"${(e.location || '').replace(/"/g, '""')}"`,
+    `"${(e.message || '').replace(/"/g, '""')}"`,
+    `"${(e.status || '').replace(/"/g, '""')}"`
+  ]);
+
+  const csvContent = '\uFEFF' + [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `narch-client-enquiries-${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+});
+
+/* ---------- Project & Services Rendering ---------- */
+function renderProjectRows() {
+  const tbody = document.getElementById('proj-rows');
+  const projs = currentData.projects || [];
+  tbody.innerHTML = projs.map((p, idx) => `
+    <tr>
+      <td>
+        <div style="display:flex; align-items:center; gap:12px;">
+          ${p.image ? `<img src="${p.image}" alt="" style="width:48px; height:48px; border-radius:8px; object-fit:cover; border:1px solid var(--line); flex-shrink:0;">` : `<div style="width:48px; height:48px; border-radius:8px; background:var(--line); display:flex; align-items:center; justify-content:center; font-size:10px; color:var(--muted); flex-shrink:0;">No img</div>`}
+          <div><b>${p.title}</b></div>
+        </div>
+      </td>
+      <td><span class="tag" style="background:var(--line); padding:4px 8px; border-radius:6px; font-size:12px;">${p.category}</span></td>
+      <td>${p.location || '—'}</td>
+      <td>${p.size || '—'}</td>
+      <td>
+        <button onclick="deleteProject(${idx})" style="background:none; border:none; color:var(--err); cursor:pointer; font-weight:600;">Delete</button>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function renderServicesList() {
+  const container = document.getElementById('services-list');
+  const srvs = currentData.services || [];
+  container.innerHTML = srvs.map((s, idx) => `
+    <div style="border:1px solid var(--line); border-radius:12px; padding:20px; background:var(--paper);">
+      <h3 style="margin-bottom:6px;">${s.name}</h3>
+      <p style="color:var(--muted); font-size:14px; margin-bottom:10px;">${s.short}</p>
+      <ul style="padding-left:20px; font-size:14px; color:var(--ink);">
+        ${s.pts.map(pt => `<li>${pt}</li>`).join('')}
+      </ul>
+    </div>
+  `).join('');
+}
+
+function deleteProject(idx) {
+  if (confirm('Delete this project card?')) {
+    currentData.projects.splice(idx, 1);
+    renderProjectRows();
+    showToast('Project removed.');
+  }
+}
+
+document.getElementById('btn-add-proj').addEventListener('click', () => {
+  const title = prompt('Project Title (e.g., Luxury Hill Villa):');
+  if (!title) return;
+  const category = prompt('Category (Construction, Interiors, 3D Elevation, Renovation, Landscaping):', 'Construction');
+  const location = prompt('Location (e.g., Sulthan Bathery):', 'Sulthan Bathery');
+  const size = prompt('Built-up Size (e.g., 2,800 sq ft):', '2,500 sq ft');
+  const image = prompt('Image URL (leave blank for architectural placeholder):', '');
+
+  currentData.projects.push({
+    id: Date.now(),
+    title,
+    category: category || 'Construction',
+    location: location || 'Wayanad',
+    size: size || 'Custom Build',
+    image: image || '',
+    placeholder: !image
+  });
+  renderProjectRows();
+  showToast('Project added! Click Save Changes Live.');
+});
+
+// Tab navigation
+document.querySelectorAll('.admin-nav button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.admin-nav button').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-pane').forEach(p => p.hidden = true);
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).hidden = false;
+  });
+});
+
+// Save to localStorage
+document.getElementById('btn-save').addEventListener('click', () => {
+  currentData.config.phone = document.getElementById('cfg-phone').value;
+  currentData.config.phone2 = document.getElementById('cfg-phone2').value;
+  currentData.config.whatsapp = document.getElementById('cfg-wa').value;
+  currentData.config.email = document.getElementById('cfg-email').value;
+  currentData.config.hours = document.getElementById('cfg-hours').value;
+  currentData.config.address = document.getElementById('cfg-addr').value;
+  currentData.config.mapsUrl = document.getElementById('cfg-maps').value;
+  currentData.config.instagram = document.getElementById('cfg-insta').value;
+  currentData.config.facebook = document.getElementById('cfg-fb').value;
+
+  currentData.config.siteTitle = document.getElementById('seo-title').value;
+  currentData.config.metaDescription = document.getElementById('seo-desc').value;
+  currentData.config.gaId = document.getElementById('seo-ga').value;
+
+  localStorage.setItem('narch_cms_content', JSON.stringify(currentData, null, 2));
+  showToast('Changes saved live! Site updated.');
+});
+
+// Export updated JSON
+document.getElementById('btn-export').addEventListener('click', () => {
+  const blob = new Blob([JSON.stringify(currentData, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'site-content.json';
+  a.click();
+});
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+loadData();
+</script>
+</body>
+</html>

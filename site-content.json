@@ -1,0 +1,237 @@
+{
+  "config": {
+    "siteTitle": "N Arch Builders & Designers | Sulthan Bathery, Wayanad",
+    "metaDescription": "N Arch designs and builds premium homes, interiors and landscapes across Wayanad. Architecture, structural engineering and construction based in Sulthan Bathery, Kerala.",
+    "phone": "+91 97451 87474",
+    "phone2": "+91 94471 87474",
+    "whatsapp": "919745187474",
+    "email": "info@narch.co.in",
+    "hours": "Mon to Sat: 9:30 AM - 6:00 PM",
+    "address": "Opposite Victory Hospital, Near Matha Theatre, Sulthan Bathery, Wayanad, Kerala - 673592",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Victory+Hospital+Sulthan+Bathery+Wayanad",
+    "instagram": "",
+    "facebook": "",
+    "gaId": ""
+  },
+  "services": [
+    {
+      "name": "Construction",
+      "short": "Houses and buildings, built from foundation to finish.",
+      "long": "Complete building work for homes and small commercial spaces, supervised by our own team on site.",
+      "pts": [
+        "Foundation and structure",
+        "Masonry and roofing",
+        "Electrical and plumbing coordination",
+        "Finishing and handover"
+      ]
+    },
+    {
+      "name": "Interiors",
+      "short": "Rooms planned around how you actually live.",
+      "long": "Interior planning and fit-out that keeps storage, light and circulation in balance with the style you want.",
+      "pts": [
+        "Space planning",
+        "Modular kitchens and wardrobes",
+        "Lighting and ceilings",
+        "Furniture layout"
+      ]
+    },
+    {
+      "name": "3D Elevation",
+      "short": "See your home in 3D before a brick is laid.",
+      "long": "Realistic 3D views of the exterior so you can compare roofs, colours and materials while changes are still easy.",
+      "pts": [
+        "Front and side views",
+        "Material and colour options",
+        "Day and evening renders",
+        "Revisions until approved"
+      ]
+    },
+    {
+      "name": "Renovation",
+      "short": "Give an older building new life and new space.",
+      "long": "Repairs, extensions and remodelling for existing houses, planned to reduce disruption while you live in them.",
+      "pts": [
+        "Structural repairs",
+        "Extensions and added floors",
+        "Waterproofing and leakage fixes",
+        "Kitchen and bath upgrades"
+      ]
+    },
+    {
+      "name": "Landscaping",
+      "short": "Gardens, paths and outdoor spaces that last the monsoon.",
+      "long": "Outdoor design for sloped and flat plots, with drainage and planting chosen for Wayanad weather.",
+      "pts": [
+        "Garden and lawn design",
+        "Paving and boundary walls",
+        "Retaining walls and drainage",
+        "Planting plans"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "title": "Sakariya Residence 3D Elevation",
+      "category": "3D Elevation",
+      "location": "Sulthan Bathery",
+      "size": "3,250 sq ft",
+      "image": "assets/images/projects/project-sakariya-residence-bathery.jpg",
+      "placeholder": false
+    },
+    {
+      "id": 2,
+      "title": "Shakeer Nalukettu Residence",
+      "category": "Construction",
+      "location": "Moolankave, Sulthan Bathery",
+      "size": "3,850 sq ft",
+      "image": "assets/images/projects/project-shakeer-moolankave-front.jpg",
+      "placeholder": false
+    },
+    {
+      "id": 3,
+      "title": "Heritage Courtyard & Nadumuttam",
+      "category": "Interiors",
+      "location": "Sulthan Bathery",
+      "size": "2,600 sq ft",
+      "image": "assets/images/projects/project-nadumuttam-courtyard-swing.jpg",
+      "placeholder": false
+    },
+    {
+      "id": 4,
+      "title": "Contemporary Hillside Gable Villa",
+      "category": "3D Elevation",
+      "location": "Meppadi, Wayanad",
+      "size": "3,400 sq ft",
+      "image": "assets/images/projects/project-contemporary-hill-villa-front.jpg",
+      "placeholder": false
+    },
+    {
+      "id": 5,
+      "title": "Shakeer Nalukettu Aerial Quadrangle",
+      "category": "Construction",
+      "location": "Moolankave, Wayanad",
+      "size": "0.75 Acre Estate",
+      "image": "assets/images/projects/project-shakeer-moolankave-aerial.jpg",
+      "placeholder": false
+    },
+    {
+      "id": 6,
+      "title": "Laterite Dual-Gable Modern Residence",
+      "category": "Construction",
+      "location": "Kalpetta, Wayanad",
+      "size": "2,950 sq ft",
+      "image": "assets/images/projects/project-laterite-dual-gable-villa.jpg",
+      "placeholder": false
+    },
+    {
+      "id": 7,
+      "title": "Corporate Studio & Executive Suite",
+      "category": "Interiors",
+      "location": "Sulthan Bathery",
+      "size": "1,800 sq ft",
+      "image": "assets/images/projects/project-executive-office-suite.jpg",
+      "placeholder": false
+    },
+    {
+      "id": 8,
+      "title": "Shakeer Heritage Garden & Veranda",
+      "category": "Landscaping",
+      "location": "Moolankave, Wayanad",
+      "size": "0.75 Acre Plot",
+      "image": "assets/images/projects/project-shakeer-moolankave-angle.jpg",
+      "placeholder": false
+    },
+    {
+      "id": 9,
+      "title": "Sakariya Residence - Garden Elevation",
+      "category": "Landscaping",
+      "location": "Sulthan Bathery",
+      "size": "0.5 Acre Plot",
+      "image": "assets/images/projects/project-sakariya-residence-angle.jpg",
+      "placeholder": false
+    },
+    {
+      "id": 10,
+      "title": "Traditional Living & Skylight Atrium",
+      "category": "Interiors",
+      "location": "Sulthan Bathery",
+      "size": "2,600 sq ft",
+      "image": "assets/images/projects/project-nadumuttam-courtyard-wide.jpg",
+      "placeholder": false
+    },
+    {
+      "id": 11,
+      "title": "Modern Director Executive Cabin",
+      "category": "Interiors",
+      "location": "Sulthan Bathery",
+      "size": "1,200 sq ft",
+      "image": "assets/images/projects/project-executive-office-cabin.jpg",
+      "placeholder": false
+    },
+    {
+      "id": 12,
+      "title": "Architectural Studio Workstations",
+      "category": "Interiors",
+      "location": "Sulthan Bathery",
+      "size": "2,200 sq ft",
+      "image": "assets/images/projects/project-commercial-workstations-side.jpg",
+      "placeholder": false
+    },
+    {
+      "id": 13,
+      "title": "Commercial Collaboration Hub",
+      "category": "Interiors",
+      "location": "Sulthan Bathery",
+      "size": "2,200 sq ft",
+      "image": "assets/images/projects/project-commercial-workstations-front.jpg",
+      "placeholder": false
+    },
+    {
+      "id": 14,
+      "title": "Modern Laterite Pergola Home",
+      "category": "Renovation",
+      "location": "Kalpetta, Wayanad",
+      "size": "2,950 sq ft",
+      "image": "assets/images/projects/project-laterite-dual-gable-angle.jpg",
+      "placeholder": false
+    },
+    {
+      "id": 15,
+      "title": "Hillside Gable Villa - Terrace Perspective",
+      "category": "Renovation",
+      "location": "Meppadi, Wayanad",
+      "size": "3,400 sq ft",
+      "image": "assets/images/projects/project-contemporary-hill-villa-angle.jpg",
+      "placeholder": false
+    },
+    {
+      "id": 16,
+      "title": "Contemporary Box-Framed 3D Villa",
+      "category": "3D Elevation",
+      "location": "Sulthan Bathery",
+      "size": "3,600 sq ft",
+      "image": "assets/images/hero-3d-villa.jpg",
+      "placeholder": false
+    },
+    {
+      "id": 17,
+      "title": "Luxury Modular Chef Kitchen",
+      "category": "Interiors",
+      "location": "Kalpetta, Wayanad",
+      "size": "450 sq ft",
+      "image": "assets/images/hero-interior-kitchen.jpg",
+      "placeholder": false
+    },
+    {
+      "id": 18,
+      "title": "Heritage Sloped Roof Kerala Residence",
+      "category": "Construction",
+      "location": "Mananthavady, Wayanad",
+      "size": "3,100 sq ft",
+      "image": "assets/images/hero-kerala-home.jpg",
+      "placeholder": false
+    }
+  ]
+}
