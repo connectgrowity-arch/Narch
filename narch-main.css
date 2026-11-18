@@ -439,6 +439,10 @@ html:not(.mo) .veil{display:none}
 .mo .mega.in span{transform:none}
 .mega span:hover{color:var(--brass);-webkit-text-stroke-color:var(--brass);transition-delay:0s}
 .ftr .legal{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-top:24px;border-top:1px solid var(--night-line);font-size:.86rem;color:var(--night-muted)}
+.ftr-social{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-top:22px}
+.ftr-social a{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:rgba(237,239,235,.06);border:1px solid rgba(237,239,235,.16);color:var(--night-fg);transition:transform .25s ease,background .25s ease,border-color .25s ease,color .25s ease}
+.ftr-social a:hover{background:var(--brass);border-color:var(--brass);color:#16191b;transform:translateY(-2px)}
+.ftr-social svg{width:18px;height:18px;display:block}
 
 /* ---------- floating actions ---------- */
 .fab{position:fixed;right:max(18px,calc(env(safe-area-inset-right,0px) + 14px));bottom:calc(env(safe-area-inset-bottom,0px) + 18px);display:grid;gap:12px;z-index:90}
@@ -504,7 +508,8 @@ html:not(.mo) .veil{display:none}
   .theme-btn{display:none}
 
   /* Hero Section */
-  .hero{padding-top:10px;padding-bottom:clamp(50px,8vh,76px)}
+  .hero{padding-top:max(96px, calc(env(safe-area-inset-top, 0px) + 82px));padding-bottom:clamp(50px,8vh,76px)}
+  .wayanad-badge-pill{margin-top:6px;margin-bottom:14px;padding:6px 14px;font-size:11.5px}
   .hero-grid{gap:22px}
   .hero h1{font-size:clamp(1.95rem,8.2vw,2.7rem);line-height:1.08;margin-bottom:12px}
   .hero-copy p{font-size:15px;line-height:1.6;margin-bottom:14px}
@@ -517,15 +522,15 @@ html:not(.mo) .veil{display:none}
 
   /* Hero Stats */
   .hero-stats{grid-template-columns:repeat(3,1fr);gap:6px;margin-top:16px;padding-top:14px}
-  .stat-card{padding:10px 4px;border-radius:12px}
-  .stat-num{font-size:1.35rem}
+  .stat-card{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 4px;border-radius:12px}
+  .stat-num{font-size:1.35rem;margin-bottom:3px}
   .stat-lbl{font-size:10px}
 
   /* 3D Portal & Arch: fit inside phone screen */
   .portal-wrap{width:min(86%,290px);margin:16px auto 20px}
-  .portal{aspect-ratio:4/4.8;border-radius:999px 999px 18px 18px}
-  .outline{inset:-8px;width:calc(100% + 16px);height:calc(100% + 16px);stroke-width:1}
-  .hero-3d-badge{top:10px;padding:4px 8px;font-size:10.5px}
+  .portal{aspect-ratio:4/4.8;border-radius:999px 999px 18px 18px;border:2px solid var(--brass);box-shadow:0 16px 40px rgba(0,0,0,.6)}
+  .outline{display:none!important}
+  .hero-3d-badge{top:auto!important;bottom:14px!important;padding:6px 13px;font-size:11px;max-width:calc(100% - 20px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;justify-content:center}
 
   /* 3D Tabs: 2x2 grid centered, clear from floating buttons */
   .models{display:grid!important;grid-template-columns:1fr 1fr;gap:6px;width:min(100%,270px);margin:14px auto 0;padding:4px;border-radius:12px;background:rgba(237,239,235,.06);border:1px solid var(--night-line)}
@@ -533,7 +538,7 @@ html:not(.mo) .veil{display:none}
   .models button{font-size:12px;padding:9px 6px;border-radius:8px;text-align:center;white-space:nowrap;color:var(--night-muted);background:transparent;border:0;cursor:pointer}
   .models button[aria-pressed="true"]{background:var(--brass)!important;color:#16191b!important;font-weight:700}
   
-  .drag-note{position:static!important;margin-top:8px;transform:none!important;display:block;text-align:center;font-size:10.5px;color:var(--night-muted)}
+  .drag-note{position:static!important;left:auto!important;bottom:auto!important;translate:none!important;transform:none!important;margin-top:10px;display:block;width:100%;text-align:center;white-space:normal;font-size:10.5px;color:var(--night-muted)}
 
   /* Floating Action Buttons */
   .fab{right:12px;bottom:12px;gap:8px;z-index:99}
@@ -624,27 +629,32 @@ html:not(.mo) .veil{display:none}
 .hero-3d-img-wrap:hover .hero-3d-glare {
   opacity: 1;
 }
+#portal .stage {
+  display: none !important;
+}
 .hero-3d-badge {
   position: absolute;
-  top: 52px;
+  top: auto;
+  bottom: 16px;
   left: 50%;
   transform: translateX(-50%);
   display: inline-flex;
   align-items: center;
   gap: 8px;
   padding: 7px 16px;
+  max-width: calc(100% - 24px);
   border-radius: 99px;
-  background: rgba(15, 19, 20, 0.85);
+  background: rgba(15, 19, 20, 0.88);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(211, 162, 76, 0.5);
+  border: 1px solid rgba(211, 162, 76, 0.65);
   color: #fff;
   font: 600 11.5px/1 var(--display, sans-serif);
   letter-spacing: .05em;
   white-space: nowrap;
-  box-shadow: 0 10px 24px rgba(0,0,0,0.55);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.65);
   pointer-events: none;
-  z-index: 5;
+  z-index: 10;
 }
 .hero-3d-badge .badge-dot {
   width: 7px;

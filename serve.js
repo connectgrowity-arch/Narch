@@ -33,13 +33,17 @@ const server = http.createServer((req, res) => {
     
     res.writeHead(200, {
       'Content-Type': contentType,
-      'Cache-Control': 'no-cache',
+      'Cache-Control': 'no-cache, no-store, must-revalidate',
+      'Pragma': 'no-cache',
+      'Expires': '0',
       'Access-Control-Allow-Origin': '*'
     });
     fs.createReadStream(filePath).pipe(res);
   });
 });
 
-server.listen(PORT, '127.0.0.1', () => {
-  console.log(`Preview server running at http://localhost:${PORT}/`);
+server.listen(PORT, '0.0.0.0', () => {
+  console.log(`Preview server running at:`);
+  console.log(`  Local:   http://localhost:${PORT}/`);
+  console.log(`  Network: http://192.168.109.57:${PORT}/`);
 });
