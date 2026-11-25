@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>N Arch CMS Admin Dashboard | Content & Lead Management System</title>
-<link rel="stylesheet" href="assets/css/narch-main.css?v=3.3">
-<link rel="stylesheet" href="narch-main.css?v=3.3">
+<link rel="stylesheet" href="assets/css/narch-main.css?v=5.0">
+<link rel="stylesheet" href="narch-main.css?v=5.0">
 <style>
 .admin-shell {
   min-height: 100vh;
@@ -492,8 +492,12 @@
             <input id="cfg-wa" placeholder="919745187474">
           </div>
           <div>
-            <label for="cfg-email">Email Address</label>
-            <input id="cfg-email" type="email" placeholder="narchbuilders@gmail.com">
+            <label for="cfg-email">Official Email</label>
+            <input id="cfg-email" type="email" placeholder="info@narchdesign.com">
+          </div>
+          <div>
+            <label for="cfg-email2">Alternate Email (Optional)</label>
+            <input id="cfg-email2" type="email" placeholder="Optional secondary email">
           </div>
           <div>
             <label for="cfg-hours">Working Hours</label>
@@ -587,15 +591,17 @@ let enquiries = [];
 
 async function loadData() {
   try {
-    const res = await fetch('site-content.json');
+    const res = await fetch('site-content.json?v=7.0');
     const fileData = await res.json();
     const local = localStorage.getItem('narch_cms_content');
     if (local) {
       currentData = JSON.parse(local);
-      if (!currentData.projects || currentData.projects.length < fileData.projects.length) {
-        currentData.projects = fileData.projects;
+      if (!currentData.version || currentData.version < fileData.version) {
+        currentData = fileData;
+        try { localStorage.setItem('narch_cms_content', JSON.stringify(fileData)); } catch(e){}
+      } else {
+        currentData.config = { ...fileData.config, ...currentData.config };
       }
-      currentData.config = { ...fileData.config, ...currentData.config };
     } else {
       currentData = fileData;
     }
@@ -652,6 +658,7 @@ function populateForm() {
   document.getElementById('cfg-phone2').value = c.phone2 || '';
   document.getElementById('cfg-wa').value = c.whatsapp || '';
   document.getElementById('cfg-email').value = c.email || '';
+  document.getElementById('cfg-email2').value = c.email2 || '';
   document.getElementById('cfg-hours').value = c.hours || '';
   document.getElementById('cfg-addr').value = c.address || '';
   document.getElementById('cfg-maps').value = c.mapsUrl || '';
@@ -881,6 +888,7 @@ document.getElementById('btn-save').addEventListener('click', () => {
   currentData.config.phone2 = document.getElementById('cfg-phone2').value;
   currentData.config.whatsapp = document.getElementById('cfg-wa').value;
   currentData.config.email = document.getElementById('cfg-email').value;
+  currentData.config.email2 = document.getElementById('cfg-email2').value;
   currentData.config.hours = document.getElementById('cfg-hours').value;
   currentData.config.address = document.getElementById('cfg-addr').value;
   currentData.config.mapsUrl = document.getElementById('cfg-maps').value;
