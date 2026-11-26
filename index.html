@@ -29,9 +29,26 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <link rel="icon" href="assets/images/logo.png" type="image/png">
-<link rel="stylesheet" href="assets/css/narch-main.css?v=7.1">
+<link rel="stylesheet" href="assets/css/narch-main.css?v=8.0">
+<link rel="stylesheet" href="narch-main.css?v=8.0">
 
 <style id="narch-mobile-fixes">
+/* ==========================================================================
+   PROJECT CARDS UNIFORM ALIGNMENT & 14px RADIUS FIX
+   ========================================================================== */
+.pcard { min-width: 0 !important; display: flex !important; flex-direction: column !important; }
+.pcard:nth-child(n),
+.pcard:nth-child(3n+2),
+.pcard:nth-child(even) {
+  margin-top: 0 !important;
+}
+.pcard .frame,
+.pcard:nth-child(n) .frame,
+.pcard:nth-child(3n+2) .frame,
+.pcard:nth-child(even) .frame {
+  aspect-ratio: 16/9 !important;
+  border-radius: 14px !important;
+}
 /* ==========================================================================
    DIRECT EMBEDDED HERO, FOOTER SOCIAL & MOBILE RESPONSIVE STYLES
    ========================================================================== */
